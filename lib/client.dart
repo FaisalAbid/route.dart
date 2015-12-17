@@ -807,7 +807,7 @@ class Router {
    * Listens for window history events and invokes the router. On older
    * browsers the hashChange event is used instead.
    */
-  void listen({bool ignoreClick: false, Element appRoot}) {
+   listen({bool ignoreClick: false, Element appRoot}) async{
     _logger.finest('listen ignoreClick=$ignoreClick');
     if (_listen) {
       throw new StateError('listen can only be called once');
@@ -822,7 +822,8 @@ class Router {
           }
         });
       });
-      route(_normalizeHash(_window.location.hash));
+      await route(_normalizeHash(_window.location.hash));
+      window.history.pushState("ti","ti","/ti");
     } else {
       String getPath() =>
           '${_window.location.pathname}${_window.location.search}'
