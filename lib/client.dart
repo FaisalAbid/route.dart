@@ -827,7 +827,7 @@ class Router {
         });
       });
       await route(_normalizeHash(_window.location.hash));
-      window.history.pushState("ti","ti","/friendlyURL");
+      window.history.pushState("ti","ti",_normalizeHash(window.location.hash));
       listenToChange = false;
       window.location.hash = " ";
       listenToChange = true;
