@@ -813,8 +813,12 @@ class Router {
       throw new StateError('listen can only be called once');
     }
     _listen = true;
+    bool listenToChange = true;
     if (_useFragment) {
       _window.onHashChange.listen((_) {
+        if(!listenToChange){
+          return;
+        }
         route(_normalizeHash(_window.location.hash)).then((allowed) {
           // if not allowed, we need to restore the browser location
           if (!allowed) {
@@ -823,7 +827,11 @@ class Router {
         });
       });
       await route(_normalizeHash(_window.location.hash));
-      window.history.pushState("ti","ti","/ti");
+      window.history.pushState("ti","ti","/friendlyURL");
+      listenToChange = false;
+      window.location.hash = "";
+      listenToChange = true;
+
     } else {
       String getPath() =>
           '${_window.location.pathname}${_window.location.search}'
