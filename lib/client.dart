@@ -829,9 +829,8 @@ class Router {
       await route(_normalizeHash(_window.location.hash));
       window.history.pushState("ti","ti","/friendlyURL");
       listenToChange = false;
-      window.location.hash = "";
+      window.location.hash = " ";
       listenToChange = true;
-
     } else {
       String getPath() =>
           '${_window.location.pathname}${_window.location.search}'
