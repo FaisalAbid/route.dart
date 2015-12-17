@@ -827,9 +827,9 @@ class Router {
         });
       });
       await route(_normalizeHash(_window.location.hash));
-      window.history.pushState("ti","ti",_normalizeHash(window.location.hash));
+      _window.history.pushState("ti","ti","/${_window.location.hash.toString()}");
       listenToChange = false;
-      window.location.hash = " ";
+      _window.location.hash = " ";
       listenToChange = true;
     } else {
       String getPath() =>
